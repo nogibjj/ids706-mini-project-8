@@ -12,7 +12,7 @@ This project compares the performance of Python and Rust for calculating mean, m
 - For calculating mean, median, and std of each column in **Rust**, it took **0.002 seconds**. <br>
   [![Rust Result](https://github.com/aghakishiyeva/ids706-mini-project-8/assets/78721466/90ddd636-58b0-4c86-ae3e-851053ccf0d3)]()
 
-For a detailed breakdown, navigate to the successful workflow in the Actions tab or directly access it through this [link](https://github.com/nogibjj/ids706-mini-project-8/actions/runs/6609455439/job/17949631962). 
+For a detailed breakdown, navigate to the successful workflow in the Actions tab or directly access it through this [link](https://github.com/nogibjj/ids706-mini-project-8/actions/runs/6609532995/job/17949828550). 
   
 ## Repository Structure
 
