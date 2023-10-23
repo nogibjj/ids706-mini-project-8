@@ -15,7 +15,8 @@ fn main() -> Result<(), Box<dyn Error>> {
     let start_time = Instant::now();
 
     // Read the dataset
-    let mut rdr = csv::Reader::from_path("../Data/winequality-red.csv")?;
+    let data_path = format!("{}/Data/winequality-red.csv", std::env::var("GITHUB_WORKSPACE").unwrap());
+    let mut rdr = csv::Reader::from_path(data_path)?;
     let mut data: Vec<Vector<f64>> = vec![];
 
     for result in rdr.deserialize() {
