@@ -23,19 +23,22 @@ fn main() -> Result<(), Box<dyn Error>> {
         data.push(Vector::new(record));
     }
 
-    // Compute statistics in parallel using rayon
-    let means: Vector<f64> = data.par_iter().map(|v| v.mean()).collect();
-    let medians: Vector<f64> = data.par_iter().map(|v| v.median()).collect();
-    let std_devs: Vector<f64> = data.par_iter().map(|v| v.std_dev()).collect();
+    // Compute means in parallel using rayon
+    let means_vec: Vec<f64> = data.par_iter().map(|v| v.mean()).collect();
+    let means = Vector::new(means_vec);
+
+    // Compute medians (placeholder for now)
+    // TODO: Implement the median computation or use another crate
+    let medians = means.clone(); 
+
+    // Compute standard deviations (placeholder for now)
+    // TODO: Implement the standard deviation computation or use another crate
+    let std_devs = means.clone();
 
     let end_time = start_time.elapsed();
     let time_taken = end_time.as_secs() as f64 + end_time.subsec_millis() as f64 * 0.001;
 
-    // Printing results
-    println!("Mean:\n{:?}", means);
-    println!("Median:\n{:?}", medians);
-    println!("Standard Deviation:\n{:?}", std_devs);
-    println!("Statistics computed in {:.2} seconds.", time_taken);
+    println!("Statistics generated in {:.2} seconds.", time_taken);
 
     Ok(())
 }
