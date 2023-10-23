@@ -9,13 +9,11 @@ This project compares the performance of Python and Rust for calculating mean, m
 - For calculating mean, median, and std of each column in **Python**, it took **0.008 seconds**. <br>
   [![Python Result](https://github.com/aghakishiyeva/ids706-mini-project-8/assets/78721466/a4cb6120-d33f-4942-a515-5829bd61e88d)]()
 
-  
-  To see the details, go to [x job in the successful GitHub actions link](your-github-actions-link-for-python-job).
-  
-- For calculating mean, median, and std of each column in **Rust**, it took **0.002 seconds**. 
+- For calculating mean, median, and std of each column in **Rust**, it took **0.002 seconds**. <br>
   [![Rust Result](https://github.com/aghakishiyeva/ids706-mini-project-8/assets/78721466/90ddd636-58b0-4c86-ae3e-851053ccf0d3)]()
 
-  To see the details, go to [x job in the successful GitHub actions link](your-github-actions-link-for-rust-job).
+For a detailed breakdown, navigate to the successful workflow in the Actions tab or directly access it through this [link](https://github.com/aghakishiyeva/ids706-mini-project-8/actions/runs/6609284941). 
+  
 ## Repository Structure
 
 - `.github/workflows/main.yml`: Contains the GitHub Actions workflow that automatically runs the Python and Rust code on every push.
@@ -29,5 +27,24 @@ This project compares the performance of Python and Rust for calculating mean, m
 
 1. Fork and clone the repository:
    ```bash
-   git clone https://github.com/<your-github-username>/<your-repo-name>.git
-   cd <your-repo-name>
+   git clone https://github.com/aghakishiyeva/ids706-mini-project-8.git
+   cd ids706-mini-project-8
+   ```
+
+2. Running Python code:
+
+   ```bash
+   cd Python/src
+   python main.py
+   ```
+
+3. Running Rust code:
+
+   ```bash
+   cd Rust
+   cargo run
+   ```
+
+   
+
+   
