@@ -16,13 +16,13 @@ For a detailed breakdown, navigate to the successful workflow in the Actions tab
   
 ## Repository Structure
 
-* .github/workflows/main.yml: Contains the GitHub Actions workflow that automatically runs the Python and Rust code on every push.
-* Data/winequality-red.csv: Dataset used for the calculations.
-* Python/src/main.py: Source code written in Python.
-* Python/requirements.txt: Lists the Python dependencies required to run the Python code.
-* Rust/src/main.rs: Source code written in Rust.
-* Rust/src/Cargo.toml: Rust's package configuration file, listing Rust dependencies and other metadata.
-* README.md: This file, containing documentation for the repository.
+- `.github/workflows/main.yml`: Contains the GitHub Actions workflow that automatically runs the Python and Rust code on every push.
+- `Data/winequality-red.csv`: Dataset used for the calculations.
+- `Python/src/main.py`: Source code written in Python.
+- `Python/requirements.txt`: Lists the Python dependencies required to run the Python code.
+- `Rust/src/main.rs`: Source code written in Rust.
+- `Rust/src/Cargo.toml`: Rust's package configuration file, listing Rust dependencies and other metadata.
+- `README.md`: This file, containing documentation for the repository.
 
 
 ## How to Run Locally
