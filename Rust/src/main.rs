@@ -52,7 +52,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     let end_time = start_time.elapsed();
     let time_taken = end_time.as_secs() as f64 + end_time.subsec_millis() as f64 * 0.001;
 
-    println!("\nStatistics generated in {:.2} seconds.", time_taken);
+    println!("Statistics generated in {} seconds.", time_taken);
 
     Ok(())
 }
