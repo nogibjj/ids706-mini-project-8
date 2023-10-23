@@ -28,7 +28,7 @@ jobs:
         pip install pandas xlsxwriter
 
     - name: Run Python script
-      run: python3 Python/python.py
+      run: python3 Python/src/main.py
 
     - name: Set up Rust
       uses: actions-rs/toolchain@v1
