@@ -6,7 +6,6 @@ use std::path::PathBuf;
 use std::env;
 use std::time::Instant;
 use na::DVector;
-use rayon::prelude::*;
 
 fn main() -> Result<(), Box<dyn Error>> {
     let start_time = Instant::now();
@@ -33,8 +32,8 @@ fn main() -> Result<(), Box<dyn Error>> {
     // Compute statistics for each column
     let means: Vec<f64> = data.iter().map(|v| v.mean()).collect();
     let medians: Vec<f64> = data.iter().map(|v| {
-        let mut sorted = v.clone();
-        sorted.sort();
+        let mut sorted = v.clone().data.into();
+        sorted.sort_by(|a, b| a.partial_cmp(b).unwrap());
         let mid = sorted.len() / 2;
         if sorted.len() % 2 == 0 {
             (sorted[mid - 1] + sorted[mid]) / 2.0
@@ -48,8 +47,8 @@ fn main() -> Result<(), Box<dyn Error>> {
     }).collect();
 
     // Print statistics for each column
-    for (i, (mean, median, std_dev)) in means.iter().zip(&medians).zip(&std_devs).enumerate() {
-        println!("Column {}: Mean = {}, Median = {}, Std Dev = {}", i, mean, median, std_dev);
+    for ((mean, median), std_dev) in means.iter().zip(&medians).zip(&std_devs) {
+        println!("Mean = {}, Median = {}, Std Dev = {}", mean, median, std_dev);
     }
 
     // Time taken
