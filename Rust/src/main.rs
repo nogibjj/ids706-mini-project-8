@@ -1,58 +1,62 @@
 extern crate csv;
-extern crate rayon;
-extern crate rusty_machine;
+extern crate nalgebra as na;
 
 use std::error::Error;
+use std::fs::File;
 use std::path::PathBuf;
+use std::env;
 use std::time::Instant;
+use na::Vector;
 use rayon::prelude::*;
-use rusty_machine::linalg::Vector;
 
 fn main() -> Result<(), Box<dyn Error>> {
     let start_time = Instant::now();
 
-    // Read the dataset
-    let data_path = PathBuf::from(std::env::var("GITHUB_WORKSPACE")?)
+    // Set up the CSV reader
+    let data_path = PathBuf::from(env::var("GITHUB_WORKSPACE")?)
         .join("Data")
         .join("winequality-red.csv");
     let mut rdr = csv::Reader::from_path(data_path)?;
-    let mut data: Vec<Vector<f64>> = vec![];
+    
+    let mut rows: Vec<Vec<f64>> = Vec::new();
 
+    // Read and collect all rows into the rows Vec
     for result in rdr.deserialize() {
         let record: Vec<f64> = result?;
-        data.push(Vector::new(record));
+        rows.push(record);
     }
 
-    // Compute means in parallel using rayon
-    let means_vec: Vec<f64> = data.par_iter().map(|v| v.mean()).collect();
-    let means = Vector::new(means_vec);
+    // Transpose the rows to columns
+    let data: Vec<Vector<f64>> = (0..rows[0].len()).map(|i| {
+        Vector::new(rows.iter().map(|row| row[i]).collect::<Vec<f64>>())
+    }).collect();
 
-    // Compute medians (placeholder for now)
-    // TODO: Implement the median computation or use another crate
-    let medians = means.clone(); 
+    // Compute statistics for each column
+    let means: Vec<f64> = data.iter().map(|v| v.mean()).collect();
+    let medians: Vec<f64> = data.iter().map(|v| {
+        let mut sorted = v.clone();
+        sorted.sort();
+        let mid = sorted.size() / 2;
+        if sorted.size() % 2 == 0 {
+            (sorted[mid - 1] + sorted[mid]) / 2.0
+        } else {
+            sorted[mid]
+        }
+    }).collect();
+    let std_devs: Vec<f64> = data.iter().map(|v| {
+        let mean = v.mean();
+        f64::sqrt(v.iter().map(|&x| (x - mean) * (x - mean)).sum::<f64>() / v.size() as f64)
+    }).collect();
 
-    // Compute standard deviations (placeholder for now)
-    // TODO: Implement the standard deviation computation or use another crate
-    let std_devs = means.clone();
-
-    // Print statistics
-    println!("Mean values:");
-    for (i, mean) in means.iter().enumerate() {
-        println!("Column {}: {}", i + 1, mean);
+    // Print statistics for each column
+    for (i, (mean, median, std_dev)) in means.iter().zip(&medians).zip(&std_devs).enumerate() {
+        println!("Column {}: Mean = {}, Median = {}, Std Dev = {}", i, mean, median, std_dev);
     }
-    println!("\nMedian values:");
-    for (i, median) in medians.iter().enumerate() {
-        println!("Column {}: {}", i + 1, median);
-    }
-    println!("\nStandard Deviation values:");
-    for (i, std_dev) in std_devs.iter().enumerate() {
-        println!("Column {}: {}", i + 1, std_dev);
-    }
 
+    // Time taken
     let end_time = start_time.elapsed();
     let time_taken = end_time.as_secs() as f64 + end_time.subsec_millis() as f64 * 0.001;
-
-    println!("Statistics generated in {} seconds.", time_taken);
+    println!("\nStatistics generated in {} seconds.", time_taken);
 
     Ok(())
 }
