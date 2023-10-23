@@ -1,0 +1,49 @@
+name: Generate Statistics
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run-scripts:
+    name: Run Python and Rust scripts
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pandas xlsxwriter
+
+    - name: Run Python script
+      run: python3 Python/python.py
+
+    - name: Set up Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        profile: minimal
+        components: rustfmt, clippy
+
+    - name: Build and run Rust code
+      run: |
+        cd Rust
+        cargo build --release
+        cargo run --release
+
+    - name: Upload Excel files as artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: statistics-files
+        path: |
+          Python/statistics_python.xlsx
+          Rust/target/release/statistics_rust.xlsx
