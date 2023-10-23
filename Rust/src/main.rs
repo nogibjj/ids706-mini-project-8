@@ -2,11 +2,10 @@ extern crate csv;
 extern crate nalgebra as na;
 
 use std::error::Error;
-use std::fs::File;
 use std::path::PathBuf;
 use std::env;
 use std::time::Instant;
-use na::Vector;
+use na::DVector;
 use rayon::prelude::*;
 
 fn main() -> Result<(), Box<dyn Error>> {
@@ -27,8 +26,8 @@ fn main() -> Result<(), Box<dyn Error>> {
     }
 
     // Transpose the rows to columns
-    let data: Vec<Vector<f64>> = (0..rows[0].len()).map(|i| {
-        Vector::new(rows.iter().map(|row| row[i]).collect::<Vec<f64>>())
+    let data: Vec<DVector<f64>> = (0..rows[0].len()).map(|i| {
+        DVector::from_vec(rows.iter().map(|row| row[i]).collect::<Vec<f64>>())
     }).collect();
 
     // Compute statistics for each column
@@ -36,8 +35,8 @@ fn main() -> Result<(), Box<dyn Error>> {
     let medians: Vec<f64> = data.iter().map(|v| {
         let mut sorted = v.clone();
         sorted.sort();
-        let mid = sorted.size() / 2;
-        if sorted.size() % 2 == 0 {
+        let mid = sorted.len() / 2;
+        if sorted.len() % 2 == 0 {
             (sorted[mid - 1] + sorted[mid]) / 2.0
         } else {
             sorted[mid]
@@ -45,7 +44,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     }).collect();
     let std_devs: Vec<f64> = data.iter().map(|v| {
         let mean = v.mean();
-        f64::sqrt(v.iter().map(|&x| (x - mean) * (x - mean)).sum::<f64>() / v.size() as f64)
+        f64::sqrt(v.iter().map(|&x| (x - mean) * (x - mean)).sum::<f64>() / v.len() as f64)
     }).collect();
 
     // Print statistics for each column
