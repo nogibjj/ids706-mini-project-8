@@ -1,5 +1,6 @@
 import pandas as pd
 import time
+import os
 
 def compute_stats_and_export():
     # Read dataset
