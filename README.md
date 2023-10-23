@@ -1,6 +1,6 @@
 # Python & Rust Performance Comparison
 
-![CI](https://github.com/nogibjj/ids706-mini-project-8/actions/workflows/main.yml/badge.svg)
+![CI](https://github.com/nogibjj/ids706-mini-project-8/actions/workflows/main.yml/badge.svg) 
 
 This project compares the performance of Python and Rust for calculating mean, median, and standard deviation for each column of a dataset.
 
