@@ -4,7 +4,8 @@ import time
 def compute_stats_and_export():
     # Read dataset
     start_time = time.time()
-    data = pd.read_csv("../Data/winequality-red.csv")
+    data_path = os.path.join(os.environ['GITHUB_WORKSPACE'], "Data", "winequality-red.csv")
+    data = pd.read_csv(data_path)
 
     # Compute statistics
     mean = data.mean()
