@@ -32,7 +32,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     // Compute statistics for each column
     let means: Vec<f64> = data.iter().map(|v| v.mean()).collect();
     let medians: Vec<f64> = data.iter().map(|v| {
-        let mut sorted = v.clone().data.into();
+        let mut sorted: Vec<f64> = v.clone().data.into();
         sorted.sort_by(|a, b| a.partial_cmp(b).unwrap());
         let mid = sorted.len() / 2;
         if sorted.len() % 2 == 0 {
