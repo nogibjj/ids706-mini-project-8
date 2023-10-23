@@ -7,15 +7,15 @@ This project compares the performance of Python and Rust for calculating mean, m
 ## Results
 
 - For calculating mean, median, and std of each column in **Python**, it took **0.007 seconds**. 
-  [Screenshot 2023-10-23 at 01 52 30](https://github-production-user-asset-6210df.s3.amazonaws.com/78721466/277240916-2b5b78eb-bf4f-4087-8c18-62fe61c0a58e.png)
+  [![Screenshot 2023-10-23 at 01 55 22](https://github.com/aghakishiyeva/ids706-mini-project-8/assets/78721466/a4cb6120-d33f-4942-a515-5829bd61e88d)]()
+
   
   To see the details, go to [x job in the successful GitHub actions link](your-github-actions-link-for-python-job).
   
 - For calculating mean, median, and std of each column in **Rust**, it took **0.002 seconds**. 
-  ![Placeholder for Rust Screenshot](link-to-your-rust-screenshot)
+  [![](link-to-your-rust-screenshot)]()
   
   To see the details, go to [x job in the successful GitHub actions link](your-github-actions-link-for-rust-job).
-
 ## Repository Structure
 
 - `.github/workflows/main.yml`: Contains the GitHub Actions workflow that automatically runs the Python and Rust code on every push.
