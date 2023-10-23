@@ -6,7 +6,7 @@ This project compares the performance of Python and Rust for calculating mean, m
 
 ## Results
 
-- For calculating mean, median, and std of each column in **Python**, it took **0.007 seconds**. 
+- For calculating mean, median, and std of each column in **Python**, it took **0.008 seconds**. <br>
   [![Screenshot 2023-10-23 at 01 55 22](https://github.com/aghakishiyeva/ids706-mini-project-8/assets/78721466/a4cb6120-d33f-4942-a515-5829bd61e88d)]()
 
   
