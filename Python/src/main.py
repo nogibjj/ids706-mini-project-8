@@ -21,7 +21,8 @@ def compute_stats_and_export():
     print("Mean:\n", mean)
     print("\nMedian:\n", median)
     print("\nStandard Deviation:\n", std)
-    print(f"\nStatistics computed in {time_taken:.2f} seconds.")
+    print(f"Statistics generated in {time_taken} seconds.")
+
 
 if __name__ == "__main__":
     compute_stats_and_export()
