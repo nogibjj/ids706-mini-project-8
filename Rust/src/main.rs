@@ -35,10 +35,24 @@ fn main() -> Result<(), Box<dyn Error>> {
     // TODO: Implement the standard deviation computation or use another crate
     let std_devs = means.clone();
 
+    // Print statistics
+    println!("Mean values:");
+    for (i, mean) in means.iter().enumerate() {
+        println!("Column {}: {}", i + 1, mean);
+    }
+    println!("\nMedian values:");
+    for (i, median) in medians.iter().enumerate() {
+        println!("Column {}: {}", i + 1, median);
+    }
+    println!("\nStandard Deviation values:");
+    for (i, std_dev) in std_devs.iter().enumerate() {
+        println!("Column {}: {}", i + 1, std_dev);
+    }
+
     let end_time = start_time.elapsed();
     let time_taken = end_time.as_secs() as f64 + end_time.subsec_millis() as f64 * 0.001;
 
-    println!("Statistics generated in {:.2} seconds.", time_taken);
+    println!("\nStatistics generated in {:.2} seconds.", time_taken);
 
     Ok(())
 }
